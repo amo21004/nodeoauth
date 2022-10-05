@@ -42,7 +42,7 @@ app.get('/oauth-callback', async (request, response) => {
     console.log('Step 2: Performing post request on https://github.com/login/oauth/access_token');
 
     await axios.post('https://github.com/login/oauth/access_token', body, options).then(_response => _response.data.access_token).then(access_token => {
-        if(!access_token) {
+        if (!access_token) {
             return;
         }
 
