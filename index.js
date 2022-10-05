@@ -24,23 +24,6 @@ const github_auth_url = 'https://github.com/login/oauth/authorize?client_id=';
 
 const axios = require('axios');
 
-const session = require('express-session');
-
-const session_configuration = {
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {}
-};
-
-if(process.env.ENVIRONMENT != 'development') {
-    app.set('trust proxy', 1);
-
-    session_configuration.cookie.secure = true;
-}
-
-app.use(session(session_configuration));
-
 app.get('/oauth-callback', async (request, response) => {
     const code = request.query.code;
 
@@ -75,11 +58,6 @@ app.get('/auth', (request, response) => {
     console.log('Step 1: Redirecting user to: ' + github_auth_url + process.env.GITHUB_CLIENT_ID);
 
     response.redirect(github_auth_url + process.env.GITHUB_CLIENT_ID);
-});
-
-app.get('/', (request, response) => {
-    console.log(request.session);
-    response.send();
 });
 
 app.get('/success', async (request, response) => {
