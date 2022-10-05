@@ -10,16 +10,6 @@ const port = process.env.PORT || 3000;
 
 app.listen(port);
 
-const cors = require('cors');
-
-app.use(cors());
-
-const bodyParser = require("body-parser");
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(bodyParser.json());
-
 const github_auth_url = 'https://github.com/login/oauth/authorize?client_id=';
 
 const axios = require('axios');
